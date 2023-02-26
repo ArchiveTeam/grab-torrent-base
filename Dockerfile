@@ -8,8 +8,8 @@ RUN curl -L https://github.com/arvidn/libtorrent/releases/download/v${LIBTORRENT
  && cd libtorrent-rasterbar-${LIBTORRENT_VERSION} \
  && mkdir build \
  && cd build \
- && cmake -DCMAKE_BUILD_TYPE=Release -Dpython-bindings=ON -Dpython-egg-info=ON -Dpython-install-system-dir=ON -DCMAKE_CXX_STANDARD=14 -G Ninja .. \
- && ninja
+ && cmake -j1 -DCMAKE_BUILD_TYPE=Release -Dpython-bindings=ON -Dpython-egg-info=ON -Dpython-install-system-dir=ON -DCMAKE_CXX_STANDARD=14 -G Ninja .. \
+ && ninja -j1
 RUN echo "import site; site.addsitedir('/libtorrent-rasterbar-${LIBTORRENT_VERSION}/build/bindings/python')" > /usr/local/lib/python3.9/site-packages/sitecustomize.py
 RUN pip install --no-cache-dir requests seesaw 
 WORKDIR /grab
